@@ -36,8 +36,8 @@ user_servings = int(input("Enter the number of servings you would like to make: 
 conversion1 = user_servings / recipe_servings
 
 print("\nConversion:")
-print(f"{user_servings} / {recipe_servings} 
-      = {user_servings / recipe_servings} * amount needed for each ingredient\n")
+print(f"{user_servings} / {recipe_servings} "
+      f"= {user_servings / recipe_servings} * amount needed for each ingredient\n")
 
 # Multiples the conversion number by the original recipes amounts for each ingredient and displays the conversion
 print(f"The recipe for {user_servings} servings is:")
@@ -45,8 +45,8 @@ print(f"\t- {butter * conversion1:.2f} cup(s) of butter\n"
       f"\t- {white_sugar * conversion1:.2f} cup(s) white sugar\n"
       f"\t- {egg * conversion1:.2f} egg(s)\n"
       f"\t- {vanilla_ex * conversion1:.2f} teaspoon(s) vanilla extract\n"
-      f"\t- {cocoa1 * conversion1:.2f} cup(s) and {cocoa2 * conversion1} tbsp. 
-      and {cocoa3 * conversion1} tsp. unsweetened cocoa powder\n"
+      f"\t- {cocoa1 * conversion1:.2f} cup(s) and {cocoa2 * conversion1} tbsp. "
+      f"and {cocoa3 * conversion1} tsp. unsweetened cocoa powder\n"
       f"\t- {ap_flour * conversion1:.2f} cup(s) all-purpose flour\n"
       f"\t- {salt * conversion1:.2f} tsp. salt\n"
       f"\t- {baking_pow * conversion1:.2f} teaspoon(s) baking powder")
