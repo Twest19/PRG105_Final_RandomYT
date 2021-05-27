@@ -13,5 +13,5 @@ for day in days:
     sales = float(input(f"What was the total amount of sales on {day}? "))
     weekly_total += sales
 
-print(f"\nThe total amount of sales for the week was: {weekly_total:.2f}")
-print(F"The average amount of sales per day was: {weekly_total / 7:.2f}")
+print(f"\nThe total amount of sales for the week was: ${weekly_total:,.2f}")
+print(F"The average amount of sales per day was: ${weekly_total / 7:,.2f}")
