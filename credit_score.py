@@ -1,5 +1,5 @@
 """
-
+Ask your user for their credit score. Tell them if they have Bad, Fair, Good, or Excellent credit.
 """
 
 user_score = int(input("What is your credit score? "))
