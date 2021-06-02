@@ -44,13 +44,29 @@ print("=" * 10, "Section 5.3 design a program using functions", "=" * 10)
 
 def main():
     knock()
+    knock2()
+    knock3()
+    knock4()
+    knock5()
 
 
 def knock():
     print("Knock knock.")
+
+
+def knock2():
     print("Who's there?")
+
+
+def knock3():
     print("Nobel.")
+
+
+def knock4():
     print("Nobel who?")
+
+
+def knock5():
     print("Nobel...that's why I knocked.")
 
 
