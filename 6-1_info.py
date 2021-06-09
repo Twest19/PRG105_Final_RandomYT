@@ -11,13 +11,13 @@
 
 def main():
     entries = int(input("How many people would you like to add to the file? "))
+    file = open('contact_info.txt', 'w')
     for entries in range(0, entries):
         name = input("What is the person's name? ")
         phone_num = input("what is their phone number? ")
         email = input("What is their email address? ")
-        file = open('contact_info.txt', 'a')
         file.write(f"{name}, {phone_num}, {email}\n")
-        file.close()
+    file.close()
 
 
 main()
