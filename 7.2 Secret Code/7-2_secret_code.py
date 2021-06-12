@@ -24,7 +24,7 @@ def main():
     for x in prompt:
         for y in range(0, len(abc)):
             if x.upper() == abc[y]:
-                secret_code += morse[y]
+                secret_code += morse[y] + ' '
 
     print(f"{prompt} in morse code translates to: \n{secret_code}")
     filename = 'secret_code.txt'
