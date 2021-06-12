@@ -19,16 +19,18 @@ def main():
              '....-', '.....', '-....', '--...', '---..', '----.', '-----']
 
     prompt = input("Enter a phrase you would like to translate into morse code: ")
-
-    secret_code = ""
+    
+    secret_code = []
     for x in prompt:
         for y in range(0, len(abc)):
             if x.upper() == abc[y]:
-                secret_code += (morse[y] + " ")
+                secret_code += morse[y]
 
     print(f"{prompt} in morse code translates to: \n{secret_code}")
-    new_file = open('secret_code.txt', 'w')
-    new_file.writelines(secret_code)
+    filename = 'secret_code.txt'
+    with open(filename, 'w') as new_file:
+        for letters in secret_code:
+            new_file.write(str(letters) + "\n")
     new_file.close()
 
 
