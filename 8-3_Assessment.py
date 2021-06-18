@@ -36,6 +36,7 @@ def main():
             y = n.split()
             over.append(y)
         file_two.close()
+        
     if stop is False:  # This code will only run if the correct file is found
         print(f"The following accounts are at least 90 days over due:\n")
         for x in range(0, len(over)):  # This will get index value for list over
