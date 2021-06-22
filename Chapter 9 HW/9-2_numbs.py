@@ -15,7 +15,7 @@ def main():
     correct = 0
 
     for k, v in num_dict.items():
-        answer = input(f"What is the equivalent of {v} in English? ")
+        answer = input(f"What is the equivalent of {v} in English? ").lower()
         if answer == k:
             print(f"{k.title()} is correct!\n")
             correct += 1
