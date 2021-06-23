@@ -19,18 +19,8 @@ class Dice:  # note class names are capitalized
         # TODO change toss() to roll()
     def roll(self):
         # TODO get a random value and set side_up for the 6 sides of the dice
-        if random.randint(1, 7) == 1:
-            self.side_up = 1
-        elif random.randint(1, 7) == 2:
-            self.side_up = 2
-        elif random.randint(1, 7) == 3:
-            self.side_up = 3
-        elif random.randint(1, 7) == 4:
-            self.side_up = 4
-        elif random.randint(1, 7) == 5:
-            self.side_up = 5
-        else:
-            self.side_up = 6
+        side_up = random.randint(0, 6)
+        self.side_up = side_up
             
     def get_side_up(self):
         return self.side_up
