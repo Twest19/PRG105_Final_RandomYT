@@ -39,12 +39,17 @@ class Data:  # This class takes the data for a person and returns that data
     def get_phone(self):
         return self.phone
 
+    def __str__(self):
+        return f"Name: {self.name}\nAddress: {self.address}\nAge: {self.age}\nPhone: {self.phone}\n"
 
-my_data = Data('Tim', '119 W South Ave', 21, '815-354-7216')
-print(f"{my_data.get_name()}\n{my_data.get_address()}\n{my_data.get_age()}\n{my_data.get_phone()}\n")
 
-friend_data = Data('Saul', '9800 Montgomery Blvd', 49, '505-503-4455')
-print(f"{friend_data.get_name()}\n{friend_data.get_address()}\n{friend_data.get_age()}\n{friend_data.get_phone()}\n")
+def main():
+    my_data = Data('Tim', '119 W South Ave', 21, '815-354-7216')
+    friend_data = Data('Saul', '9800 Montgomery Blvd', 49, '505-503-4455')
+    family_data = Data('Tom', '191 E North Ave', 42)
+    print(my_data)
+    print(friend_data)
+    print(family_data)
 
-family_data = Data('Tom', '191 E North Ave', 42)
-print(f"{family_data.get_name()}\n{family_data.get_address()}\n{family_data.get_age()}\n{family_data.get_phone()}")
+
+main()
