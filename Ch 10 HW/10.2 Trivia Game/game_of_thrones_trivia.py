@@ -38,6 +38,16 @@ def main():
                  "(C) Brienne of Tarth", "(D) Ser Jorah Mormont\n", "A"),
         Question("Who is The Hound's brother?", "(A) Robert Baratheon", "(B) The Mountain", "(C) Tyrion",
                  "(D) Hodor\n", "B"),
+        Question("What is Jon Snow's sword named?", "(A) Oathkeeper", "(B) Longclaw", "(C) The Wall",
+                 "(D) Widow's Wail\n", "B"),
+        Question("How many dragons did Daenarys Targaryen have?", "(A) 5", "(B) 2", "(C) 1",
+                 "(D) 3\n", "D"),
+        Question("What is Catelyn Stark's maiden name?", "(A) Baratheon", "(B) Martell", "(C) Tully",
+                 "(D) Frey\n", "C"),
+        Question("In what episode is the Red Wedding?", "(A) The Rains of Castamere", "(B) The Queens Justice",
+                 "(C) Kissed by Fire", "(D) Mother's Mercy\n", "A"),
+        Question("Who is The King Beyond the Wall?", "(A) Tormund Giantsbane", "(B) Jon Snow", "(C) Crastor",
+                 "(D) Mance Rayder\n", "D"),
     ]
 
     players = {'player one': 0, 'player two': 0}  # Dictionary of the players and their scores
