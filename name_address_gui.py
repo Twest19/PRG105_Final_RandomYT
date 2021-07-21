@@ -1,3 +1,10 @@
+"""
+    Write a GUI program that displays your name and address when a button is clicked 
+    (you can use the address of the school). The program’s window should resemble the 
+    sketch on the far left side of figure 13-26 when it runs. When the user clicks the 
+    Show Info button, the program should display your name and address as shown in the 
+    sketch on the right of the figure.
+"""
 import tkinter
 
 
