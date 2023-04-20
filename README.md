@@ -1,2 +1,2 @@
-# prg105
-Programming logic homework
+# MCC - PRG105 Final Project
+
