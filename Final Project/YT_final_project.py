@@ -316,7 +316,7 @@ class RandomVid:
 if __name__ == '__main__':
     root = Tk()
     root.title("Random YouTube Video?")  # This is title of program
-    root.iconbitmap('C:/Users/white/Desktop/YouTube Python Project/Project_imgs/youtube_button.ico')
+    root.iconbitmap('C:/Users/Tim/Documents/GitHub/YouTube-Python-Project/Project_imgs/youtube_button.ico')
     root.geometry("400x400")
     root.configure(bg='gray')
     root.resizable(False, False)
