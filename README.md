@@ -1,5 +1,5 @@
 
-# MCC - PRG105 Final Project
+# MCC - PRG105 Final Project - *OUTDATED README* As of 5/25/23 I have updated this project to use a local Video Player.
 
 ## FAQ
 
