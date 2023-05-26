@@ -1,7 +1,7 @@
 import os
-from YT_Project_With_Window import Video
-from DestroyableTk import DestroyableTK
-from YT_final_project import RandomVid
+from video import Video
+from destroyable_tk import DestroyableTK
+from random_vid import RandomVid
 
 # Program starts here
 """
