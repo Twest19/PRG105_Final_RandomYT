@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
     Tim West, Programming Logic 105 - Final Project
 
@@ -86,9 +85,6 @@
 
 """
 from YouTubeAPIError import YouTubeAPIError
-=======
-from googleapiclient.discovery import build
->>>>>>> 8597753a32773863b0fd7bdc78545637cdd7bf8e
 from tkinter import *
 from tkinter import messagebox
 import webbrowser
@@ -115,6 +111,7 @@ class RandomVid:
         # Call self.Category() to display buttons
         # self.category()
         self.youtube = YouTubeAPI(api_key)
+        self.api_error = YouTubeAPIError()
         self.url_list = []
         self.run()
 
@@ -154,9 +151,11 @@ class RandomVid:
     def enter_action(self, my_dict, clicked, results):
         try:
             self.url_list = self.youtube.link(my_dict, clicked, results)
-        except (KeyError, TclError, YouTubeAPIError) as e:
+        except (KeyError, TclError) as e:
             print(f"Error, {str(e)} ")
             messagebox.showwarning('Error', "Please select from the drop down menus, then hit enter!")
+        except YouTubeAPIError as yt_err:
+            messagebox.showwarning('Error', str(yt_err))
         else:
             self._vid_opener()
 

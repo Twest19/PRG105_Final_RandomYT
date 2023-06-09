@@ -1,6 +1,6 @@
 from googleapiclient.discovery import build
-
-from YouTubeAPIError import YouTubeAPIError
+from googleapiclient.errors import HttpError
+from YouTubeAPIError import *
 
 
 class YouTubeAPI:
@@ -9,6 +9,8 @@ class YouTubeAPI:
         # Initialize Api key
         self.api_key = api_key
         self.error = YouTubeAPIError()
+        self.response_two = None
+        self.vid_list = []
 
     """Method gathers the categories available on YouTube"""
     def category(self):
@@ -55,14 +57,17 @@ class YouTubeAPI:
                 maxResults=result
             )
 
-            vid_list = []
-            response_two = request.execute()
+            self.response_two = request.execute()
 
-            for item in response_two['items']:  # Saves video ids to a list
-                vid_list.append(f"https://www.youtube.com/watch?v={item['id']}")
-
-        except YouTubeAPIError:
-            raise self.error.no_selection_error()
+        except HttpError as e:
+            if e.resp.status == 404:
+                print(f"A HTTP error occurred: {e}")
+                raise NotFoundError()
+            else:
+                raise APIError(str(e))
 
         else:
-            return vid_list
+            for item in self.response_two['items']:  # Saves video ids to a list
+                self.vid_list.append(f"https://www.youtube.com/watch?v={item['id']}")
+
+            return self.vid_list
