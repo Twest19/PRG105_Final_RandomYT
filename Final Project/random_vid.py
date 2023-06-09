@@ -84,11 +84,13 @@
             https://docs.python.org/3/library/os.html
 
 """
-from googleapiclient.discovery import build
+from YouTubeAPIError import YouTubeAPIError
 from tkinter import *
 from tkinter import messagebox
 import webbrowser
 import random
+
+from YouTubeAPI import YouTubeAPI
 
 
 class RandomVid:
@@ -100,8 +102,6 @@ class RandomVid:
     def __init__(self, api_key, local_player, root):
         # root
         self.root = root
-        # Initialize Api key
-        self.api_key = api_key
         # Create Video class to display video locally
         self.local_player = local_player
         # Create frames
@@ -109,33 +109,14 @@ class RandomVid:
         # Setup buttons and labels for later
         self.setup_buttons_and_labels()
         # Call self.Category() to display buttons
-        self.category()
+        # self.category()
+        self.youtube = YouTubeAPI(api_key)
+        self.url_list = []
+        self.run()
 
-    def category(self):
-        # This is where we will contact the YouTube API to get the category names and ids
-        youtube = build('youtube', 'v3', developerKey=self.api_key)
-        request = youtube.videoCategories().list(
-            part='snippet',
-            regionCode='US'
-        )
-
-        response_one = request.execute()  # Execute the youtube api request for categories
-
-        # Add the categories and category ids to dictionary, should update if YouTube adds any new ones
-        my_dict = {}
-        for item in response_one['items']:
-            if item['snippet']['assignable'] is False:
-                pass
-            else:
-                tube_dict1 = item['snippet']['title']
-                tube_dict2 = item['id']
-                my_dict[tube_dict1] = tube_dict2
-
-        # The Trending category will need to be added manually here
-        my_dict['Trending'] = '0'
-
-        # The Travel category does not work, so needs to be removed
-        del my_dict['Travel & Events']
+    def run(self):
+        # Get the categories available
+        my_dict = self.youtube.category()
 
         # Numbers could go up to 50, but I would advise sticking to at most 15
         numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
@@ -156,61 +137,26 @@ class RandomVid:
         # Create a drop-down menu to have user make a selection
         category_drop = self.create_option_btn(self.mid_frame, clicked, my_dict.keys())
         num_videos = self.create_option_btn(self.mid_frame, results, numbers)
+
         # Enter Button
-        enter_button = Button(self.mid_frame, text="Enter", command=lambda: self.get_link(my_dict, clicked, results),
+        enter_button = Button(self.mid_frame, text="Enter",
+                              command=lambda: self.enter_action(my_dict, clicked, results),
                               bg='lightgreen', activebackground='lightgreen', width=18)
         # Add option menus and enter button to mid frame
         category_drop.grid(row=1, column=0, padx=10, pady=10)
         num_videos.grid(row=2, column=0, padx=10, pady=10)
         enter_button.grid(row=2, column=1, pady=10, padx=10)
 
-    def get_link(self, my_dict, click, num):
+    def enter_action(self, my_dict, clicked, results):
         try:
-            result = num.get()
-            clicked_label = click.get()
-            youtube = build('youtube', 'v3', developerKey=self.api_key)
-
-            # Uses selected category to get video ids from the YouTube API
-            request = youtube.videos().list(
-                part='snippet,contentDetails,statistics',
-                chart='mostPopular',
-                regionCode='US',
-                videoCategoryId=my_dict[clicked_label],
-                maxResults=result
-            )
-
-            vid_list = []
-            response_two = request.execute()
-
-            for item in response_two['items']:  # Saves video ids to a list
-                vid_list.append(item['id'])
-
-        except (KeyError, TclError):
-            messagebox.showwarning('Error', 'Please select from the drop down menus, then hit enter!')
-
+            self.url_list = self.youtube.link(my_dict, clicked, results)
+        except (KeyError, TclError, YouTubeAPIError) as e:
+            print(f"Error, {str(e)} ")
+            messagebox.showwarning('Error', "Please select from the drop down menus, then hit enter!")
         else:
-            with open('youtube_links.txt', 'w') as file:  # Writes the links to a file
-                for ids in vid_list:
-                    vids = f'https://www.youtube.com/watch?v={ids}'  # Inserts video ids into a YouTube link
-                    file.write(vids + '\n')
-            file.close()
-            # Makes next set of menus pop up in window
-            self.vid_opener()
+            self._vid_opener()
 
-    def vid_opener(self):
-        # Adds the YouTube links from the file to a list
-        with open('youtube_links.txt', 'r') as file_in:
-            lines = file_in.readlines()
-
-        url_list = []
-        url_list2 = []
-
-        for url in lines:
-            url_list.append(url.strip('\n'))
-            url_list2.append(url.strip('\n'))
-
-        file_in.close()
-
+    def _vid_opener(self):
         options = ['Randomize', 'Most Popular First', 'Least Popular First']
 
         selected = StringVar()
@@ -231,7 +177,7 @@ class RandomVid:
         option_btn2.grid(row=2, column=0, padx=10, pady=10)
         # Green Enter Button
         enter_button = Button(self.status_frame, text="Enter",
-                              command=lambda: self.get_options(selected, url_list, options, url_list),
+                              command=lambda: self.get_options(selected, self.url_list, options, self.url_list),
                               bg='lightgreen', activebackground='lightgreen', width=self.BUTTON_WIDTH)
         enter_button.grid(row=2, column=1, pady=10, padx=10)
 
